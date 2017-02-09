@@ -2,6 +2,8 @@ import React from 'react'
 import {Router} from 'dva/router'
 import App from './routes/app'
 
+import Test from "./routes/Test.js";
+
 export default function ({history, app}) {
   const routes = [
     {
@@ -43,6 +45,14 @@ export default function ({history, app}) {
           getComponent (nextState, cb) {
             require.ensure([], require => {
               cb(null, require('./routes/ui/search'))
+            })
+          }
+        },{
+          path: 'test',
+          name: 'test',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              cb(null, require('./routes/Test'))
             })
           }
         }, {

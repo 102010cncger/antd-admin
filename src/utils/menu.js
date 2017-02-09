@@ -10,6 +10,11 @@ module.exports = [
     icon: 'user'
   },
   {
+    key: 'test',
+    name: '测试',
+    icon: 'test'
+  },
+  {
     key: 'ui',
     name: 'UI组件',
     icon: 'camera-o',
