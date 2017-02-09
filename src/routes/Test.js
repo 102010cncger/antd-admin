@@ -3,9 +3,12 @@ import { connect } from 'dva';
 import styles from './Test.css';
 
 function Test({ location, dispatch, test }) {
+  const { name } = test
   return (
     <div className={styles.normal}>
-      Route Component: Test{test.name}
+      <span>from state: {test.name}</span>
+      <br></br>
+      <span>from param: {name}</span>
     </div>
   );
 }
