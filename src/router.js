@@ -2,8 +2,6 @@ import React from 'react'
 import {Router} from 'dva/router'
 import App from './routes/app'
 
-import Test from "./routes/Test.js";
-
 export default function ({history, app}) {
   const routes = [
     {
@@ -64,6 +62,15 @@ export default function ({history, app}) {
             })
           }
         }
+        // ,{
+        //   path: 'project/index',
+        //   name: 'project/index',
+        //   getComponent (nextState, cb) {
+        //     require.ensure([], require => {
+        //       cb(null, require('./routes/project/Index.js'))
+        //     })
+        //   }
+        // }
       ]
     }
   ]

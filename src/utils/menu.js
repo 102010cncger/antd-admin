@@ -31,6 +31,15 @@ module.exports = [
     ]
   },
   {
+    key: 'project',
+    name: '项目管理',
+    child:
+    [{
+      key: 'index',
+      name: '项目管理'
+    }]
+  },
+  {
     key: 'navigation',
     name: '测试导航',
     icon: 'setting',

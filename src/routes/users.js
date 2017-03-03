@@ -82,14 +82,11 @@ function Users ({ location, dispatch, users }) {
     }
   }
 
-  const UserModalGen = () =>
-    <UserModal {...userModalProps} />
-
   return (
     <div className='content-inner'>
       <UserSearch {...userSearchProps} />
       <UserList {...userListProps} />
-      <UserModalGen />
+      <UserModal {...userModalProps} />
     </div>
   )
 }
