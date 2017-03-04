@@ -61,6 +61,7 @@ export default function ({history, app}) {
           name: 'test',
           getComponent (nextState, cb) {
             require.ensure([], require => {
+              registerModel(app, require('./models/test'))
               cb(null, require('./routes/Test'))
             })
           }
