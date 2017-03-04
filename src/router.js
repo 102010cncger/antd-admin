@@ -2,6 +2,14 @@ import React from 'react'
 import {Router} from 'dva/router'
 import App from './routes/app'
 
+const cached = {}
+const registerModel = (app, model) => {
+  if (!cached[model.namespace]) {
+    app.model(model)
+    cached[model.namespace] = 1
+  }
+}
+
 export default function ({history, app}) {
   const routes = [
     {
@@ -9,8 +17,9 @@ export default function ({history, app}) {
       component: App,
       getIndexRoute (nextState, cb) {
         require.ensure([], require => {
+          registerModel(app, require('./models/dashboard'))
           cb(null, {component: require('./routes/dashboard')})
-        })
+        }, 'dashboard')
       },
       childRoutes: [
         {
@@ -18,16 +27,18 @@ export default function ({history, app}) {
           name: 'dashboard',
           getComponent (nextState, cb) {
             require.ensure([], require => {
+              registerModel(app, require('./models/dashboard'))
               cb(null, require('./routes/dashboard'))
-            })
+            }, 'dashboard')
           }
         }, {
           path: 'users',
           name: 'users',
           getComponent (nextState, cb) {
             require.ensure([], require => {
+              registerModel(app, require('./models/users'))
               cb(null, require('./routes/users'))
-            })
+            }, 'users')
           }
         }, {
           path: 'ui/ico',
@@ -35,7 +46,7 @@ export default function ({history, app}) {
           getComponent (nextState, cb) {
             require.ensure([], require => {
               cb(null, require('./routes/ui/ico'))
-            })
+            }, 'ui-ico')
           }
         }, {
           path: 'ui/search',
@@ -43,7 +54,7 @@ export default function ({history, app}) {
           getComponent (nextState, cb) {
             require.ensure([], require => {
               cb(null, require('./routes/ui/search'))
-            })
+            }, 'ui-search')
           }
         },{
           path: 'test',
@@ -59,7 +70,7 @@ export default function ({history, app}) {
           getComponent (nextState, cb) {
             require.ensure([], require => {
               cb(null, require('./routes/error'))
-            })
+            }, 'error')
           }
         }
         // ,{

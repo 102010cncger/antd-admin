@@ -6,7 +6,7 @@ import UserSearch from '../components/users/search'
 import UserModal from '../components/users/modal'
 
 function Users ({ location, dispatch, users }) {
-  const { loading, list, pagination, currentItem, modalVisible, modalType } = users
+  const { loading, list, pagination, currentItem, modalVisible, modalType, isMotion } = users
   const { field, keyword } = location.query
 
   const userModalProps = {
@@ -30,6 +30,8 @@ function Users ({ location, dispatch, users }) {
     dataSource: list,
     loading,
     pagination: pagination,
+    location,
+    isMotion,
     onPageChange (page) {
       const { query, pathname } = location
       dispatch(routerRedux.push({
@@ -61,6 +63,7 @@ function Users ({ location, dispatch, users }) {
   const userSearchProps = {
     field,
     keyword,
+    isMotion,
     onSearch (fieldsValue) {
       fieldsValue.keyword.length ? dispatch(routerRedux.push({
         pathname: '/users',
@@ -79,6 +82,9 @@ function Users ({ location, dispatch, users }) {
           modalType: 'create'
         }
       })
+    },
+    switchIsMotion () {
+      dispatch({type: 'users/switchIsMotion'})
     }
   }
 
@@ -97,8 +103,4 @@ Users.propTypes = {
   dispatch: PropTypes.func
 }
 
-function mapStateToProps ({ users }) {
-  return { users }
-}
-
-export default connect(mapStateToProps)(Users)
+export default connect(({users}) => ({users}))(Users)

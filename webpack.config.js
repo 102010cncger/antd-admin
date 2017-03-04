@@ -17,6 +17,7 @@ module.exports = function (webpackConfig, env) {
     }])
   } else {
     webpackConfig.babel.plugins.push('dev-expression')
+    webpackConfig.entry = {index: './src/_index.js'}
   }
 
   // Don't extract common.js and common.css
