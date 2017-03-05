@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {Table, Dropdown, Button, Menu, Icon, Modal} from 'antd'
-import styles from './list.less'
+// import styles from './list.less'
 import classnames from 'classnames'
 import TableBodyWrapper from '../common/TableBodyWrapper'
 
@@ -26,7 +26,7 @@ function list ({ loading, dataSource, pagination, onPageChange, onDeleteItem, on
       dataIndex: 'avatar',
       key: 'avatar',
       width: 64,
-      className: styles.avatar,
+      // className: styles.avatar,
       render: (text) => <img width={24} src={text} />
     }, {
       title: '姓名',
@@ -92,7 +92,6 @@ function list ({ loading, dataSource, pagination, onPageChange, onDeleteItem, on
   return (
     <div>
       <Table
-        className={classnames({[styles.table]: true, [styles.motion]: isMotion})}
         bordered
         scroll={{ x: 1200 }}
         columns={columns}
