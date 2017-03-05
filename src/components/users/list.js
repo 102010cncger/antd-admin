@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {Table, Dropdown, Button, Menu, Icon, Modal} from 'antd'
-// import styles from './list.less'
+import styles from './list.less'
 import classnames from 'classnames'
 import TableBodyWrapper from '../common/TableBodyWrapper'
 
