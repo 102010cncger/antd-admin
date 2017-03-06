@@ -12,7 +12,11 @@ export default function request (url, options) {
       method: options.method || 'get',
       data: options.data || {},
       processData: options.method === 'get',
-      dataType: 'JSON'
+      dataType: 'JSON',
+      headers: {
+        "Authorization": "Token " + localStorage.getItem('authToken'),
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     }).done((data) => {
       return data
     })
