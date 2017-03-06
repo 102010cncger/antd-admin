@@ -65,6 +65,16 @@ export default function ({history, app}) {
               cb(null, require('./routes/Test'))
             })
           }
+        },
+        {
+          path: 'eitSourceAccount',
+          name: 'eitSourceAccount',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/EitSourceAccount'))
+              cb(null, require('./routes/EitSourceAccount'))
+            })
+          }
         }, {
           path: '*',
           name: 'error',

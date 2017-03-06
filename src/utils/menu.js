@@ -31,13 +31,8 @@ module.exports = [
     ]
   },
   {
-    key: 'project',
-    name: '项目管理',
-    child:
-    [{
-      key: 'index',
-      name: '项目管理'
-    }]
+    key: 'eitSourceAccount',
+    name: 'eitSourceAccount'
   },
   {
     key: 'navigation',

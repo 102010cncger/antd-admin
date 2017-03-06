@@ -41,8 +41,8 @@
     "watchjs": "^0.0.0"
   },
   "scripts": {
-    "start": "dora --plugins \"proxy,webpack?publicPath=/base/,webpack-hmr,browser-history?index=/src/index.html\"",
-    "dev": "dora --plugins \"webpack?publicPath=/base/,webpack-hmr,browser-history?index=/src/index.html\"",
+    "start": "dora --plugins \"proxy,webpack?publicPath=/,webpack-hmr,browser-history?index=/src/index.html\"",
+    "dev": "dora --plugins \"webpack?publicPath=/,webpack-hmr,browser-history?index=/src/index.html\"",
     "lint": "eslint --fix --ext .js,.jsx src/components/layout",
     "build": "atool-build"
   },
