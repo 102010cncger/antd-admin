@@ -1,4 +1,4 @@
-import { create, remove, update, query } from '../services/EitSourceAccountService'
+import { create, remove, update, query } from '../services/EitSourceAccount'
 import { parse } from 'qs'
 
 export default {
