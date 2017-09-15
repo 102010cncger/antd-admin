@@ -5,7 +5,7 @@ import { config } from 'utils'
 import styles from './Layout.less'
 import Menus from './Menu'
 
-const Sider = ({ siderFold, darkTheme, location, changeTheme, navOpenKeys, changeOpenKeys, menu }) => {
+const Sider = ({ siderFold, darkTheme, location, changeTheme, navOpenKeys, changeOpenKeys, menu, onClick }) => {
   const menusProps = {
     menu,
     siderFold,
@@ -13,6 +13,7 @@ const Sider = ({ siderFold, darkTheme, location, changeTheme, navOpenKeys, chang
     location,
     navOpenKeys,
     changeOpenKeys,
+    onClick,
   }
   return (
     <div>

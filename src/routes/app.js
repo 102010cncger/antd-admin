@@ -11,14 +11,16 @@ import { withRouter } from 'dva/router'
 import '../themes/index.less'
 import './app.less'
 import Error from './error'
+import { Spin, message, Tabs, Icon } from 'antd'
 
+const TabPane = Tabs.TabPane
 const { prefix, openPages } = config
 
 const { Header, Bread, Footer, Sider, styles } = Layout
 let lastHref
 
 const App = ({ children, dispatch, app, loading, location }) => {
-  const { user, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys, menu, permissions } = app
+  const { user, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys, menu, permissions, tabPanes, currentTabKey } = app
   let { pathname } = location
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
   const { iconFontJS, iconFontCSS, logo } = config
@@ -69,6 +71,9 @@ const App = ({ children, dispatch, app, loading, location }) => {
       window.localStorage.setItem(`${prefix}navOpenKeys`, JSON.stringify(openKeys))
       dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
     },
+    onClick ({ item, key, selectedKeys }) {
+      dispatch({ type: 'app/flushTabs', payload: { key, children } })
+    },
   }
 
   const breadProps = {
@@ -81,6 +86,37 @@ const App = ({ children, dispatch, app, loading, location }) => {
       {children}
     </div>)
   }
+  /**
+   * 改变tab时的回调
+   */
+  const onTabChange = (activeKey) => {
+    dispatch({ type: 'app/updateState', payload: { currentTabKey: activeKey } })
+  }
+
+  /**
+   * 关闭tab时的回调
+   */
+  const onTabRemove = (targetKey) => {
+    dispatch({ type: 'app/removeTab', payload: { targetKey } })
+  }
+
+  const renderBody = () => {
+    return (<Tabs
+      type="editable-card"
+      onEdit={onTabRemove}
+      onChange={onTabChange}
+      hideAdd
+      activeKey={`${currentTabKey}`}
+    >
+      {tabPanes.map(pane => (<TabPane
+        tab={pane.key}
+        key={pane.key}
+        closable
+      >{pane.content}</TabPane>))}
+    </Tabs>)
+  }
+
+  const content = renderBody()
   return (
     <div>
       <Loader fullScreen spinning={loading.effects['app/query']} />
@@ -100,7 +136,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
           <Bread {...breadProps} />
           <div className={styles.container}>
             <div className={styles.content}>
-              {hasPermission ? children : <Error />}
+              {hasPermission ? content : <Error />}
             </div>
           </div>
           <Footer />
